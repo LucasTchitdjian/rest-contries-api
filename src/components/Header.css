@@ -1,0 +1,33 @@
+header {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), /* décalage en X, décalage en Y, flou, étendue et couleur */
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 5vh;
+}
+
+header ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    font-size: 14px;
+    width: 100%;
+}
+
+header ul li:nth-child(1) {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.dark-mode {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+}
+
+.dark-mode > svg {
+    rotate: -30deg;
+}
