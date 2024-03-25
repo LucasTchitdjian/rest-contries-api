@@ -1,10 +1,13 @@
+.search-bar {
+  margin-bottom: 5vh;
+}
+
 .search-input-container {
     position: relative;
     display: flex;
     align-items: center;
     width: 30%;
     margin-left: 5vw;
-    margin-bottom: 5vh;
     box-sizing: border-box;
     border-radius: 4px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -57,3 +60,35 @@ padding-left: 5px;
   background-color: #fff;
 }
 
+@media screen and (max-width: 450px) {
+  .search-bar {
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+    margin-bottom: 1vh;
+  }
+  .search-input-container {
+    width: 90%;
+    margin: 0;
+    margin-bottom: 5vh;
+  }
+  .search-bar input[type="text"] {
+    padding: 20px;
+    width: 100%;
+    margin: 0;
+    margin-left: 5vw;
+  }
+  .search-bar select {
+    align-self: flex-start;
+    padding: 0;
+    padding-left: 20px;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    padding-right: 10vw;
+  }
+  .country-list {
+    gap: 20px;
+  }
+}

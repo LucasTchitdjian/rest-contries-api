@@ -37,13 +37,18 @@
   
   p.title {
     font-weight: 600;
-    margin: 0; /* Ajustez ou supprimez selon vos besoins */
+    margin: 0; 
   }
-  
-  /* Optionnel: Si vous voulez que la valeur soit alignée à droite et prenne tout l'espace disponible */
+ 
   p.value {
     flex-grow: 1;
     font-weight: 400;
+  }
+
+  @media screen and (max-width: 450px) {
+    .country-list {
+      grid-template-columns: repeat(1, 350px);
+    }
   }
 
   

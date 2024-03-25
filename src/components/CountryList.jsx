@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './CountryList.css';
+import { Link } from 'react-router-dom';
 
 export function CountryList() {
 
@@ -22,21 +23,23 @@ export function CountryList() {
     return (
         <div className="country-list">
             {countries.map((country) => (
-                    <div className="card">
+                <div className="card" key={country.name.official}>
+                    <Link to={`/country/${encodeURIComponent(country.name.common)}`}>
                         <div className="image">
                             <img src={country.flags.png} alt="" />
                         </div>
                         <h3>{country.name.official}</h3>
-                        <div className="info-container">
-                            <p className='title'>Population:</p> <p className='value'>{country.population}</p>
-                        </div>
-                        <div className="info-container">
-                            <p className='title'>Region:</p> <p className='value'>{country.region}</p>
-                        </div>
-                        <div className="info-container">
-                            <p className='title'>Capital:</p> <p className='value'>{country.capital}</p>
-                        </div>
+                    </Link>
+                    <div className="info-container">
+                        <p className='title'>Population:</p> <p className='value'>{country.population}</p>
                     </div>
+                    <div className="info-container">
+                        <p className='title'>Region:</p> <p className='value'>{country.region}</p>
+                    </div>
+                    <div className="info-container">
+                        <p className='title'>Capital:</p> <p className='value'>{country.capital}</p>
+                    </div>
+                </div>
             ))}
         </div>
     )
