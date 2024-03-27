@@ -4,16 +4,23 @@ header {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-bottom: 5vh;
+}
+
+.dark-mode header {
+    background-color: #2B3743;
 }
 
 header ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: 1rem 3rem;
     font-size: 14px;
     width: 100%;
+}
+
+.dark-mode header ul {
+    color: white;
 }
 
 header ul li:nth-child(1) {
@@ -21,13 +28,20 @@ header ul li:nth-child(1) {
     font-size: 16px;
 }
 
-.dark-mode {
+li.dark-mode {
     display: flex;
     align-items: center;
     gap: 10px;
     font-weight: 600;
+    cursor: pointer;
 }
 
 .dark-mode > svg {
     rotate: -30deg;
+}
+
+@media screen and (max-width: 450px) {
+    header ul {
+        padding: 1rem 1rem;
+    }
 }

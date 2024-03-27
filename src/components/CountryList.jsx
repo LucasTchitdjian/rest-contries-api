@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './CountryList.css';
 import { Link } from 'react-router-dom';
 
-export function CountryList() {
+export function CountryList({ searchTerm, regionFilter }) {
 
     const [countries, setCountries] = useState([]);
 
@@ -20,9 +20,13 @@ export function CountryList() {
         getAllCountries();
     }, []);
 
+      const filteredCountries = countries.filter((country) => {
+        return country.name.official.toLowerCase().includes(searchTerm.toLowerCase()) && country.region.toLowerCase().includes(regionFilter.toLowerCase());
+      });
+
     return (
         <div className="country-list">
-            {countries.map((country) => (
+            {filteredCountries.map((country) => (
                 <div className="card" key={country.name.official}>
                     <Link to={`/country/${encodeURIComponent(country.name.common)}`}>
                         <div className="image">

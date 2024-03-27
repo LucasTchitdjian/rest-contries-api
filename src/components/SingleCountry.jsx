@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Header } from './Header';
 import { FaArrowLeft } from "react-icons/fa";
+import countries from 'country-list-js';
 import './SingleCountry.css';
 
 // Cette fonction transforme l'objet currencies en une chaîne de texte
@@ -27,19 +28,18 @@ export function SingleCountry() {
         getCountryData();
     }, [name]);
 
-    if (!country) return <div>Loading...</div>;
+    if (!country) return <div className='loading'>Loading...</div>;
 
     const nativeName = country.name.nativeName ? Object.values(country.name.nativeName)[0].common : 'N/A';
-    // Assurez-vous que country.currencies existe avant de tenter de l'utiliser
     const currencies = country.currencies ? getCurrencies(country.currencies) : 'N/A';
 
     return (
         <>
             <Header />
-            <div className="btn-back">
+            <Link to="/" className="btn-back">
                 <FaArrowLeft />
-                <p><Link to='/'>Back</Link></p>
-            </div>
+                <span>Back</span> {/* Use <span> instead of <p> for inline elements like this */}
+            </Link>
             <div className="single-country">
                 <div className="image">
                     <img src={country.flags.png} alt={country.name.common} />
@@ -64,13 +64,22 @@ export function SingleCountry() {
                     </div>
                     <div className="bottom">
                         <div className="border-countries">
-                            <p>Border Countries:</p>
+                            <div className="container-1">
+                                <p>Border Countries:</p>
+                            </div>
                             <div className="border-countries-list">
-                                {country.borders.length > 0 ? country.borders.map(border => (
-                                    <Link key={border} to={`/country/${border}`}>
-                                        <button>{border}</button>
-                                    </Link>
-                                )) : 'N/A'}
+                                {country.borders && country.borders.length > 0 ? (
+                                    country.borders.map(border => {
+                                        // Utilisez findByIso3 pour récupérer les informations du pays
+                                        const borderCountry = countries.findByIso3(border);
+                                        const borderName = borderCountry ? borderCountry.name : 'Unknown';
+                                        return (
+                                            <Link key={border} to={`/country/${border}`}>
+                                                <button>{borderName}</button>
+                                            </Link>
+                                        );
+                                    })
+                                ) : 'N/A'}
                             </div>
                         </div>
                     </div>

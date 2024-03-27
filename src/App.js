@@ -4,14 +4,19 @@ import { CountryList } from './components/CountryList';
 import { Header } from './components/Header';
 import { SearchBar } from './components/SearchBar';
 import { SingleCountry } from './components/SingleCountry';
+import { useState } from 'react';
 
 // Composant pour la route racine
 function HomePage() {
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const [regionFilter, setRegionFilter] = useState('');
+
   return (
     <div className="App">
       <Header />
-      <SearchBar />
-      <CountryList />
+      <SearchBar setSearchTerm={setSearchTerm} setRegionFilter={setRegionFilter} />
+      <CountryList searchTerm={searchTerm} regionFilter={regionFilter} />
     </div>
   );
 }

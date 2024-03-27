@@ -3,7 +3,7 @@ import { IoIosSearch } from "react-icons/io";
 import './SearchBar.css';
 import { useEffect, useState } from 'react';
 
-export function SearchBar() {
+export function SearchBar({ setSearchTerm, setRegionFilter }) {
 
   const [countries, setCountries] = useState([]);
 
@@ -12,9 +12,7 @@ export function SearchBar() {
       try {
         const response = await fetch('https://restcountries.com/v3.1/all');
         const data = await response.json();
-        // Create a new Set to store unique regions
         const uniqueRegions = new Set(data.map((country) => country.region));
-        // Convert the Set back into an array
         const regionsArray = Array.from(uniqueRegions);
         setCountries(regionsArray);
       } catch (error) {
@@ -25,15 +23,21 @@ export function SearchBar() {
     getAllCountries();
   }, []);
 
+  const handleRegionFilter = (event) => {
+    setRegionFilter(event.target.value);
+  };
+
+  const handleSearchTerm = (event) => {
+    setSearchTerm(event.target.value);
+  };
 
   return (
     <div className='search-bar'>
       <div className="search-input-container">
         <IoIosSearch className="search-icon" />
-        <input type="text" placeholder="Search for a country..." />
+        <input onChange={handleSearchTerm} type="text" placeholder="Search for a country..." />
       </div>
-      <select className='select-style'>
-        <option value="">Filter by Region</option>
+      <select id='region-select' onChange={handleRegionFilter} className='select-style'>Filter by region
         {countries.map((region) => (
           <option key={region} value={region}>
             {region}
